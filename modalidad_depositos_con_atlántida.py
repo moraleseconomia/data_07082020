@@ -13,8 +13,9 @@ Original file is located at
 Fecha: 16/12/2019
 """
 
-#!pip install pygsheets
-
+# !pip install pygsheets
+# %%
+import pandas as pd
 
 # %%
 # Parámetros a Definir provienen del googlesheet creado:
@@ -25,13 +26,13 @@ archivo = '~/Google Drive/Datos/SaldosMuc20200831.xls'
 
 # %%
 
-#from google.colab import drive
-#drive.mount('/content/drive', force_remount=True)
-#drive.flush_and_unmount()
+# from google.colab import drive
+# drive.mount('/content/drive', force_remount=True)
+# drive.flush_and_unmount()
 
-import pygsheets
 #gc = pygsheets.authorize(service_account_file = r'C:\\Users\\Deybi.Morales\\Google Drive\\Scripts\\JUPYTERLAB\\elegant-weaver-254616-b76ad103c4e5.json')
-gc = pygsheets.authorize(service_account_file = 'C:/Users/Deybi.Morales/Google Drive/Scripts/JUPYTERLAB/elegant-weaver-254616-b76ad103c4e5.json')
+gc = pygsheets.authorize(service_account_file =
+                         'C:/Users/Deybi.Morales/Google Drive/Scripts/JUPYTERLAB/elegant-weaver-254616-b76ad103c4e5.json')
 sh = gc.open(googlesheet_creado)
 wks = sh.worksheet_by_title(mes)
 
@@ -58,8 +59,7 @@ wks.update_values("G3", [[TIPO]])
 
 # %%
 
-import pandas as pd
-datos = pd.read_excel(archivo)#, index_col=0)
+datos = pd.read_excel(archivo)  # , index_col=0)
 
 datos.info()
 
@@ -76,9 +76,9 @@ datos.head()
 """# Depósitos del Público"""
 
 depo_p_sin = datos.loc[datos['cuenta'].isin([
-            '21010101', '21010102', '21010200', '21010900',    #Depósitos a la vista
-             '21020100', '21020200',                         #Depósitos de Ahorro
-             '21030101', '21030102', '21030201', '21030202',  #Depósitos a Plazo
+             '21010101', '21010102', '21010200', '21010900',    # Depósitos a la vista
+             '21020100', '21020200',                         # Depósitos de Ahorro
+             '21030101', '21030102', '21030201', '21030202',  # Depósitos a Plazo
              '21030301', '21030302',
              '21040100'
 ])]
@@ -114,7 +114,7 @@ depo_p_sin_vista_CS['AVANZ'] = depo_p_sin_vista_CS[["AVANZ_moneda_1", "AVANZ_mon
 depo_p_sin_vista_CS['ATLÁNTIDA'] = depo_p_sin_vista_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 depo_p_sin_vista_CS = depo_p_sin_vista_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-depo_p_sin_vista_CS = depo_p_sin_vista_CS.append(depo_p_sin_vista_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+depo_p_sin_vista_CS = depo_p_sin_vista_CS.append(depo_p_sin_vista_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 depo_p_sin_vista_CS
 
 # %%
@@ -123,8 +123,7 @@ depo_p_sin_vista_CS
 
 depo_p_sin_ahorro_CS = datos.loc[datos['cuenta'].isin([
            '21020100',
-         '21020200'
-])]
+           '21020200'])]
 depo_p_sin_ahorro_CS.head()
 
 # %%
@@ -143,7 +142,7 @@ depo_p_sin_ahorro_CS['AVANZ'] = depo_p_sin_ahorro_CS[["AVANZ_moneda_1", "AVANZ_m
 depo_p_sin_ahorro_CS['ATLÁNTIDA'] = depo_p_sin_ahorro_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 depo_p_sin_ahorro_CS = depo_p_sin_ahorro_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-depo_p_sin_ahorro_CS = depo_p_sin_ahorro_CS.append(depo_p_sin_ahorro_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+depo_p_sin_ahorro_CS = depo_p_sin_ahorro_CS.append(depo_p_sin_ahorro_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 depo_p_sin_ahorro_CS
 
 # %%
@@ -176,7 +175,7 @@ depo_p_sin_plazos_CS['AVANZ'] = depo_p_sin_plazos_CS[["AVANZ_moneda_1", "AVANZ_m
 depo_p_sin_plazos_CS['ATLÁNTIDA'] = depo_p_sin_plazos_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 depo_p_sin_plazos_CS = depo_p_sin_plazos_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-depo_p_sin_plazos_CS = depo_p_sin_plazos_CS.append(depo_p_sin_plazos_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+depo_p_sin_plazos_CS = depo_p_sin_plazos_CS.append(depo_p_sin_plazos_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 depo_p_sin_plazos_CS
 
 # %%
@@ -204,21 +203,21 @@ depo_p_sin_otros_CS['ATLÁNTIDA'] = depo_p_sin_otros_CS[["BANCO ATLÁNTIDA_moned
 
 # %%
 depo_p_sin_otros_CS = depo_p_sin_otros_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-depo_p_sin_otros_CS = depo_p_sin_otros_CS.append(depo_p_sin_otros_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+depo_p_sin_otros_CS = depo_p_sin_otros_CS.append(depo_p_sin_otros_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 depo_p_sin_otros_CS
 
 # %%
 """#### OBTENIENDO TABLA DE DEPÓSITOS DEL PÚBLICO SIN INTERESES EN CÓRDOBAS"""
 
-depo_p_sin_vista_CS.iloc[[-1],:]
+depo_p_sin_vista_CS.iloc[[-1], :]
 # %%
-depo_p_sin_ahorro_CS.iloc[[-1],:]
+depo_p_sin_ahorro_CS.iloc[[-1], :]
 # %%
-depo_p_sin_plazos_CS.iloc[[-1],:]
+depo_p_sin_plazos_CS.iloc[[-1], :]
 # %%
-depo_p_sin_otros_CS.iloc[[-1],:]
+depo_p_sin_otros_CS.iloc[[-1], :]
 # %%
-depositos_sin_interes_CS = pd.concat([depo_p_sin_vista_CS.iloc[[-1],:], depo_p_sin_ahorro_CS.iloc[[-1],:], depo_p_sin_plazos_CS.iloc[[-1],:], depo_p_sin_otros_CS.iloc[[-1],:]])
+depositos_sin_interes_CS = pd.concat([depo_p_sin_vista_CS.iloc[[-1], :], depo_p_sin_ahorro_CS.iloc[[-1], :], depo_p_sin_plazos_CS.iloc[[-1], :], depo_p_sin_otros_CS.iloc[[-1], :]])
 depositos_sin_interes_CS['descripcion'] = ['Depósitos a la Vista', 'Depósitos de Ahorro', 'Depósitos a Plazos', 'Otros Depósitos']
 depositos_sin_interes_CS
 
@@ -230,10 +229,9 @@ depositos_sin_interes_CS
 
 depo_p_sin_vista_S = datos.loc[datos['cuenta'].isin([
              '21010101',
-    '21010102',
-    '21010200',
-    '21010900'
-])]
+             '21010102',
+             '21010200',
+             '21010900'])]
 depo_p_sin_vista_S.head()
 
 # %%
@@ -250,7 +248,7 @@ depo_p_sin_vista_S['AVANZ'] = depo_p_sin_vista_S[["AVANZ_moneda_3"]]*TIPO
 depo_p_sin_vista_S['ATLÁNTIDA'] = depo_p_sin_vista_S[["BANCO ATLÁNTIDA_moneda_3"]]*TIPO
 
 depo_p_sin_vista_S = depo_p_sin_vista_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-depo_p_sin_vista_S = depo_p_sin_vista_S.append(depo_p_sin_vista_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+depo_p_sin_vista_S = depo_p_sin_vista_S.append(depo_p_sin_vista_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 depo_p_sin_vista_S
 
 # %%
@@ -258,8 +256,7 @@ depo_p_sin_vista_S
 
 depo_p_sin_ahorro_S = datos.loc[datos['cuenta'].isin([
            '21020100',
-         '21020200'
-])]
+           '21020200'])]
 depo_p_sin_ahorro_S.head()
 
 # %%
@@ -276,7 +273,7 @@ depo_p_sin_ahorro_S['AVANZ'] = depo_p_sin_ahorro_S[["AVANZ_moneda_3"]]*TIPO
 depo_p_sin_ahorro_S['ATLÁNTIDA'] = depo_p_sin_ahorro_S[["BANCO ATLÁNTIDA_moneda_3"]]*TIPO
 
 depo_p_sin_ahorro_S = depo_p_sin_ahorro_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-depo_p_sin_ahorro_S = depo_p_sin_ahorro_S.append(depo_p_sin_ahorro_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+depo_p_sin_ahorro_S = depo_p_sin_ahorro_S.append(depo_p_sin_ahorro_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 depo_p_sin_ahorro_S
 
 # %%
@@ -284,12 +281,11 @@ depo_p_sin_ahorro_S
 
 depo_p_sin_plazos_S = datos.loc[datos['cuenta'].isin([
            '21030101',
-                  '21030102',
-                  '21030201',
-                  '21030202',
-                  '21030301',
-                  '21030302'
-])]
+           '21030102',
+           '21030201',
+           '21030202',
+           '21030301',
+           '21030302'])]
 depo_p_sin_plazos_S.head()
 
 # %%
@@ -306,7 +302,7 @@ depo_p_sin_plazos_S['AVANZ'] = depo_p_sin_plazos_S[["AVANZ_moneda_3"]]*TIPO
 depo_p_sin_plazos_S['ATLÁNTIDA'] = depo_p_sin_plazos_S[["BANCO ATLÁNTIDA_moneda_3"]]*TIPO
 
 depo_p_sin_plazos_S = depo_p_sin_plazos_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-depo_p_sin_plazos_S = depo_p_sin_plazos_S.append(depo_p_sin_plazos_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+depo_p_sin_plazos_S = depo_p_sin_plazos_S.append(depo_p_sin_plazos_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 depo_p_sin_plazos_S
 
 # %%
@@ -319,7 +315,7 @@ depo_p_sin_otros_S.head()
 
 # %%
 depo_p_sin_otros_S = depo_p_sin_otros_S.filter(regex='(cuenta|descripcion|_3)')
-#depo_p_sin_otros_S = depo_p_sin_otros_S.fillna(0, inplace=True)
+# depo_p_sin_otros_S = depo_p_sin_otros_S.fillna(0, inplace=True)
 
 depo_p_sin_otros_S.info()
 
@@ -333,23 +329,23 @@ depo_p_sin_otros_S['AVANZ'] = depo_p_sin_otros_S["AVANZ_moneda_3"]*TIPO
 depo_p_sin_otros_S['ATLÁNTIDA'] = depo_p_sin_otros_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 depo_p_sin_otros_S = depo_p_sin_otros_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-depo_p_sin_otros_S = depo_p_sin_otros_S.append(depo_p_sin_otros_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+depo_p_sin_otros_S = depo_p_sin_otros_S.append(depo_p_sin_otros_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 depo_p_sin_otros_S
 
 # %%
-depo_p_sin_vista_S.iloc[[-1],:]
+depo_p_sin_vista_S.iloc[[-1], :]
 
 # %%
-depo_p_sin_ahorro_S.iloc[[-1],:]
+depo_p_sin_ahorro_S.iloc[[-1], :]
 
 # %%
-depo_p_sin_plazos_S.iloc[[-1],:]
+depo_p_sin_plazos_S.iloc[[-1], :]
 
 # %%
-depo_p_sin_otros_S.iloc[[-1],:]
+depo_p_sin_otros_S.iloc[[-1], :]
 
 # %%
-depositos_sin_interes_S = pd.concat([depo_p_sin_vista_S.iloc[[-1],:], depo_p_sin_ahorro_S.iloc[[-1],:], depo_p_sin_plazos_S.iloc[[-1],:], depo_p_sin_otros_S.iloc[[-1],:]])
+depositos_sin_interes_S = pd.concat([depo_p_sin_vista_S.iloc[[-1], :], depo_p_sin_ahorro_S.iloc[[-1], :], depo_p_sin_plazos_S.iloc[[-1], :], depo_p_sin_otros_S.iloc[[-1], :]])
 depositos_sin_interes_S['descripcion'] = ['Depósitos a la Vista', 'Depósitos de Ahorro', 'Depósitos a Plazos', 'Otros Depósitos']
 depositos_sin_interes_S
 
@@ -357,10 +353,10 @@ depositos_sin_interes_S
 """# Intereses de Depósitos del Público"""
 
 int_p_con = datos.loc[datos['cuenta'].isin([
-                 '21080100', #Depósitos a la Vista
-                  '21080200',  #Depósitos de Ahorro
-                  '21080300',  #Depósitos a Plazo
-                  '21080400'
+                 '21080100',  # Depósitos a la Vista
+                 '21080200',  # Depósitos de Ahorro
+                 '21080300',  # Depósitos a Plazo
+                 '21080400'
 ])]
 int_p_con.head()
 
@@ -390,7 +386,7 @@ int_p_con_vista_CS['ATLÁNTIDA'] = int_p_con_vista_CS[["BANCO ATLÁNTIDA_moneda_
 
 # %%
 int_p_con_vista_CS = int_p_con_vista_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-int_p_con_vista_CS = int_p_con_vista_CS.append(int_p_con_vista_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+int_p_con_vista_CS = int_p_con_vista_CS.append(int_p_con_vista_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 int_p_con_vista_CS
 
 # %%
@@ -418,7 +414,7 @@ int_p_con_ahorro_CS['AVANZ'] = int_p_con_ahorro_CS[["AVANZ_moneda_1", "AVANZ_mon
 int_p_con_ahorro_CS['ATLÁNTIDA'] = int_p_con_ahorro_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 int_p_con_ahorro_CS = int_p_con_ahorro_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-int_p_con_ahorro_CS = int_p_con_ahorro_CS.append(int_p_con_ahorro_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+int_p_con_ahorro_CS = int_p_con_ahorro_CS.append(int_p_con_ahorro_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 int_p_con_ahorro_CS
 
 # %%
@@ -444,7 +440,7 @@ int_p_con_plazos_CS['AVANZ'] = int_p_con_plazos_CS[["AVANZ_moneda_1", "AVANZ_mon
 int_p_con_plazos_CS['ATLÁNTIDA'] = int_p_con_plazos_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 int_p_con_plazos_CS = int_p_con_plazos_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-int_p_con_plazos_CS = int_p_con_plazos_CS.append(int_p_con_plazos_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+int_p_con_plazos_CS = int_p_con_plazos_CS.append(int_p_con_plazos_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 int_p_con_plazos_CS
 
 # %%
@@ -469,19 +465,19 @@ int_p_con_otros_CS['AVANZ'] = int_p_con_otros_CS[["AVANZ_moneda_1", "AVANZ_moned
 int_p_con_otros_CS['ATLÁNTIDA'] = int_p_con_otros_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 int_p_con_otros_CS = int_p_con_otros_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-int_p_con_otros_CS = int_p_con_otros_CS.append(int_p_con_otros_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+int_p_con_otros_CS = int_p_con_otros_CS.append(int_p_con_otros_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 int_p_con_otros_CS
 
 # %%
-int_p_con_vista_CS.iloc[[-1],:]
+int_p_con_vista_CS.iloc[[-1], :]
 # %%
-int_p_con_ahorro_CS.iloc[[-1],:]
+int_p_con_ahorro_CS.iloc[[-1], :]
 # %%
-int_p_con_plazos_CS.iloc[[-1],:]
+int_p_con_plazos_CS.iloc[[-1], :]
 # %%
-int_p_con_otros_CS.iloc[[-1],:]
+int_p_con_otros_CS.iloc[[-1], :]
 # %%
-int_p_con_CS = pd.concat([int_p_con_vista_CS.iloc[[-1],:], int_p_con_ahorro_CS.iloc[[-1],:], int_p_con_plazos_CS.iloc[[-1],:], int_p_con_otros_CS.iloc[[-1],:]])
+int_p_con_CS = pd.concat([int_p_con_vista_CS.iloc[[-1], :], int_p_con_ahorro_CS.iloc[[-1], :], int_p_con_plazos_CS.iloc[[-1], :], int_p_con_otros_CS.iloc[[-1], :]])
 int_p_con_CS['descripcion'] = ['Depósitos a la Vista', 'Depósitos de Ahorro', 'Depósitos a Plazos', 'Otros Depósitos']
 int_p_con_CS
 
@@ -509,7 +505,7 @@ int_p_con_vista_S['AVANZ'] = int_p_con_vista_S["AVANZ_moneda_3"]*TIPO
 int_p_con_vista_S['ATLÁNTIDA'] = int_p_con_vista_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 int_p_con_vista_S = int_p_con_vista_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-int_p_con_vista_S = int_p_con_vista_S.append(int_p_con_vista_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+int_p_con_vista_S = int_p_con_vista_S.append(int_p_con_vista_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 int_p_con_vista_S
 
 # %%
@@ -534,7 +530,7 @@ int_p_con_ahorro_S['AVANZ'] = int_p_con_ahorro_S["AVANZ_moneda_3"]*TIPO
 int_p_con_ahorro_S['ATLÁNTIDA'] = int_p_con_ahorro_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 int_p_con_ahorro_S = int_p_con_ahorro_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-int_p_con_ahorro_S = int_p_con_ahorro_S.append(int_p_con_ahorro_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+int_p_con_ahorro_S = int_p_con_ahorro_S.append(int_p_con_ahorro_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 int_p_con_ahorro_S
 
 # %%
@@ -559,7 +555,7 @@ int_p_con_plazos_S['AVANZ'] = int_p_con_plazos_S["AVANZ_moneda_3"]*TIPO
 int_p_con_plazos_S['ATLÁNTIDA'] = int_p_con_plazos_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 int_p_con_plazos_S = int_p_con_plazos_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-int_p_con_plazos_S = int_p_con_plazos_S.append(int_p_con_plazos_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+int_p_con_plazos_S = int_p_con_plazos_S.append(int_p_con_plazos_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 int_p_con_plazos_S
 
 # %%
@@ -584,19 +580,19 @@ int_p_con_otros_S['AVANZ'] = int_p_con_otros_S["AVANZ_moneda_3"]*TIPO
 int_p_con_otros_S['ATLÁNTIDA'] = int_p_con_otros_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 int_p_con_otros_S = int_p_con_otros_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-int_p_con_otros_S = int_p_con_otros_S.append(int_p_con_otros_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+int_p_con_otros_S = int_p_con_otros_S.append(int_p_con_otros_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 int_p_con_otros_S
 
 # %%
-int_p_con_vista_S.iloc[[-1],:]
+int_p_con_vista_S.iloc[[-1], :]
 # %%
-int_p_con_ahorro_S.iloc[[-1],:]
+int_p_con_ahorro_S.iloc[[-1], :]
 # %%
-int_p_con_plazos_S.iloc[[-1],:]
+int_p_con_plazos_S.iloc[[-1], :]
 # %%
-int_p_con_otros_S.iloc[[-1],:]
+int_p_con_otros_S.iloc[[-1], :]
 # %%
-int_p_con_S = pd.concat([int_p_con_vista_S.iloc[[-1],:], int_p_con_ahorro_S.iloc[[-1],:], int_p_con_plazos_S.iloc[[-1],:], int_p_con_otros_S.iloc[[-1],:]])
+int_p_con_S = pd.concat([int_p_con_vista_S.iloc[[-1], :], int_p_con_ahorro_S.iloc[[-1], :], int_p_con_plazos_S.iloc[[-1], :], int_p_con_otros_S.iloc[[-1], :]])
 int_p_con_S['descripcion'] = ['Depósitos a la Vista', 'Depósitos de Ahorro', 'Depósitos a Plazos', 'Otros Depósitos']
 int_p_con_S
 
@@ -607,18 +603,17 @@ int_p_con_S
 """
 
 fina_p_sin = datos.loc[datos['cuenta'].isin([
-            '22010101','22010102', '22010103', '22010104',       #Depósitos a la vista
-           '22010201', '22010202', '22010203', '22010204',       #Depósitos de Ahorro
-           '22010301', '22010302', '22010303', '22010304'
-])]
+    '22010101', '22010102', '22010103', '22010104',  # Depósitos a la vista
+    '22010201', '22010202', '22010203', '22010204',  # Depósitos de Ahorro
+    '22010301', '22010302', '22010303', '22010304'])]
+
 fina_p_sin.head()
 
 # %%
 """### DEPÓSITOS A LA VISTA EN CÓRDOBAS"""
 
 fina_p_sin_vista_CS = datos.loc[datos['cuenta'].isin([
-           '22010101','22010102', '22010103', '22010104'
-])]
+    '22010101', '22010102', '22010103', '22010104'])]
 fina_p_sin_vista_CS.head()
 
 # %%
@@ -635,7 +630,7 @@ fina_p_sin_vista_CS['AVANZ'] = fina_p_sin_vista_CS[["AVANZ_moneda_1", "AVANZ_mon
 fina_p_sin_vista_CS['ATLÁNTIDA'] = fina_p_sin_vista_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 fina_p_sin_vista_CS = fina_p_sin_vista_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_p_sin_vista_CS = fina_p_sin_vista_CS.append(fina_p_sin_vista_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_p_sin_vista_CS = fina_p_sin_vista_CS.append(fina_p_sin_vista_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_p_sin_vista_CS
 
 # %%
@@ -661,7 +656,7 @@ fina_p_sin_ahorro_CS['AVANZ'] = fina_p_sin_ahorro_CS[["AVANZ_moneda_1", "AVANZ_m
 fina_p_sin_ahorro_CS['ATLÁNTIDA'] = fina_p_sin_ahorro_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 fina_p_sin_ahorro_CS = fina_p_sin_ahorro_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_p_sin_ahorro_CS = fina_p_sin_ahorro_CS.append(fina_p_sin_ahorro_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_p_sin_ahorro_CS = fina_p_sin_ahorro_CS.append(fina_p_sin_ahorro_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_p_sin_ahorro_CS
 
 # %%
@@ -686,17 +681,17 @@ fina_p_sin_plazos_CS['AVANZ'] = fina_p_sin_plazos_CS[["AVANZ_moneda_1", "AVANZ_m
 fina_p_sin_plazos_CS['ATLÁNTIDA'] = fina_p_sin_plazos_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 fina_p_sin_plazos_CS = fina_p_sin_plazos_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_p_sin_plazos_CS = fina_p_sin_plazos_CS.append(fina_p_sin_plazos_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_p_sin_plazos_CS = fina_p_sin_plazos_CS.append(fina_p_sin_plazos_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_p_sin_plazos_CS
 
 # %%
-fina_p_sin_vista_CS.iloc[[-1],:]
+fina_p_sin_vista_CS.iloc[[-1], :]
 # %%
-fina_p_sin_ahorro_CS.iloc[[-1],:]
+fina_p_sin_ahorro_CS.iloc[[-1], :]
 # %%
-fina_p_sin_plazos_CS.iloc[[-1],:]
+fina_p_sin_plazos_CS.iloc[[-1], :]
 # %%
-financiera_sin_interes_CS = pd.concat([fina_p_sin_vista_CS.iloc[[-1],:], fina_p_sin_ahorro_CS.iloc[[-1],:], fina_p_sin_plazos_CS.iloc[[-1],:]])
+financiera_sin_interes_CS = pd.concat([fina_p_sin_vista_CS.iloc[[-1], :], fina_p_sin_ahorro_CS.iloc[[-1], :], fina_p_sin_plazos_CS.iloc[[-1], :]])
 financiera_sin_interes_CS['descripcion'] = ['Depósitos a la Vista', 'Depósitos de Ahorro', 'Depósitos a Plazos']
 financiera_sin_interes_CS
 
@@ -707,8 +702,7 @@ financiera_sin_interes_CS
 """
 
 fina_p_sin_vista_S = datos.loc[datos['cuenta'].isin([
-        '22010101','22010102', '22010103', '22010104'
-])]
+    '22010101', '22010102', '22010103', '22010104'])]
 fina_p_sin_vista_S.head()
 
 # %%
@@ -725,7 +719,7 @@ fina_p_sin_vista_S['AVANZ'] = fina_p_sin_vista_S["AVANZ_moneda_3"]*TIPO
 fina_p_sin_vista_S['ATLÁNTIDA'] = fina_p_sin_vista_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 fina_p_sin_vista_S = fina_p_sin_vista_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_p_sin_vista_S = fina_p_sin_vista_S.append(fina_p_sin_vista_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_p_sin_vista_S = fina_p_sin_vista_S.append(fina_p_sin_vista_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_p_sin_vista_S
 
 # %%
@@ -751,7 +745,7 @@ fina_p_sin_ahorro_S['ATLÁNTIDA'] = fina_p_sin_ahorro_S["BANCO ATLÁNTIDA_moneda
 
 # %%
 fina_p_sin_ahorro_S = fina_p_sin_ahorro_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_p_sin_ahorro_S = fina_p_sin_ahorro_S.append(fina_p_sin_ahorro_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_p_sin_ahorro_S = fina_p_sin_ahorro_S.append(fina_p_sin_ahorro_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_p_sin_ahorro_S
 
 # %%
@@ -776,26 +770,26 @@ fina_p_sin_plazos_S['AVANZ'] = fina_p_sin_plazos_S["AVANZ_moneda_3"]*TIPO
 fina_p_sin_plazos_S['ATLÁNTIDA'] = fina_p_sin_plazos_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 fina_p_sin_plazos_S = fina_p_sin_plazos_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_p_sin_plazos_S = fina_p_sin_plazos_S.append(fina_p_sin_plazos_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_p_sin_plazos_S = fina_p_sin_plazos_S.append(fina_p_sin_plazos_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_p_sin_plazos_S
 
 # %%
-fina_p_sin_vista_S.iloc[[-1],:]
+fina_p_sin_vista_S.iloc[[-1], :]
 # %%
-fina_p_sin_ahorro_S.iloc[[-1],:]
+fina_p_sin_ahorro_S.iloc[[-1], :]
 # %%
-fina_p_sin_plazos_S.iloc[[-1],:]
+fina_p_sin_plazos_S.iloc[[-1], :]
 # %%
-financiera_sin_interes_S = pd.concat([fina_p_sin_vista_S.iloc[[-1],:], fina_p_sin_ahorro_S.iloc[[-1],:], fina_p_sin_plazos_S.iloc[[-1],:]])
+financiera_sin_interes_S = pd.concat([fina_p_sin_vista_S.iloc[[-1], :], fina_p_sin_ahorro_S.iloc[[-1], :], fina_p_sin_plazos_S.iloc[[-1], :]])
 financiera_sin_interes_S['descripcion'] = ['Depósitos a la Vista', 'Depósitos de Ahorro', 'Depósitos a Plazos']
 financiera_sin_interes_S
 # %%
 """## INTERESES EN DÓLARES"""
 
 fina_int_p_con = datos.loc[datos['cuenta'].isin([
-                      '22050101', #Depósitos a la Vista
-                      '22050102',  #Depósitos de Ahorro
-                      '22050103'  #Depósitos a Plazo
+                      '22050101',  # Depósitos a la Vista
+                      '22050102',  # Depósitos de Ahorro
+                      '22050103'  # Depósitos a Plazo
 ])]
 fina_int_p_con.head()
 
@@ -822,7 +816,7 @@ fina_int_p_con_vista_CS['AVANZ'] = fina_int_p_con_vista_CS[["AVANZ_moneda_1", "A
 fina_int_p_con_vista_CS['ATLÁNTIDA'] = fina_int_p_con_vista_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 fina_int_p_con_vista_CS = fina_int_p_con_vista_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_int_p_con_vista_CS = fina_int_p_con_vista_CS.append(fina_int_p_con_vista_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_int_p_con_vista_CS = fina_int_p_con_vista_CS.append(fina_int_p_con_vista_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_int_p_con_vista_CS
 
 # %%
@@ -848,7 +842,7 @@ fina_int_p_con_ahorro_CS['ATLÁNTIDA'] = fina_int_p_con_ahorro_CS[["BANCO ATLÁN
 
 # %%
 fina_int_p_con_ahorro_CS = fina_int_p_con_ahorro_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_int_p_con_ahorro_CS = fina_int_p_con_ahorro_CS.append(fina_int_p_con_ahorro_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_int_p_con_ahorro_CS = fina_int_p_con_ahorro_CS.append(fina_int_p_con_ahorro_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_int_p_con_ahorro_CS
 
 # %%
@@ -874,20 +868,20 @@ fina_int_p_con_plazos_CS['AVANZ'] = fina_int_p_con_plazos_CS[["AVANZ_moneda_1", 
 fina_int_p_con_plazos_CS['ATLÁNTIDA'] = fina_int_p_con_plazos_CS[["BANCO ATLÁNTIDA_moneda_1", "BANCO ATLÁNTIDA_moneda_2"]].sum(axis=1)
 
 fina_int_p_con_plazos_CS = fina_int_p_con_plazos_CS[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_int_p_con_plazos_CS = fina_int_p_con_plazos_CS.append(fina_int_p_con_plazos_CS.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_int_p_con_plazos_CS = fina_int_p_con_plazos_CS.append(fina_int_p_con_plazos_CS.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_int_p_con_plazos_CS
 
 # %%
-fina_int_p_con_vista_CS.iloc[[-1],:]
+fina_int_p_con_vista_CS.iloc[[-1], :]
 
 # %%
-fina_int_p_con_ahorro_CS.iloc[[-1],:]
+fina_int_p_con_ahorro_CS.iloc[[-1], :]
 
 # %%
-fina_int_p_con_plazos_CS.iloc[[-1],:]
+fina_int_p_con_plazos_CS.iloc[[-1], :]
 
 # %%
-fina_int_p_con_CS = pd.concat([fina_int_p_con_vista_CS.iloc[[-1],:], fina_int_p_con_ahorro_CS.iloc[[-1],:], fina_int_p_con_plazos_CS.iloc[[-1],:]])
+fina_int_p_con_CS = pd.concat([fina_int_p_con_vista_CS.iloc[[-1], :], fina_int_p_con_ahorro_CS.iloc[[-1], :], fina_int_p_con_plazos_CS.iloc[[-1], :]])
 fina_int_p_con_CS['descripcion'] = ['Depósitos a la Vista', 'Depósitos de Ahorro', 'Depósitos a Plazos']
 fina_int_p_con_CS
 
@@ -916,7 +910,7 @@ fina_int_p_con_vista_S['AVANZ'] = fina_int_p_con_vista_S["AVANZ_moneda_3"]*TIPO
 fina_int_p_con_vista_S['ATLÁNTIDA'] = fina_int_p_con_vista_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 fina_int_p_con_vista_S = fina_int_p_con_vista_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_int_p_con_vista_S = fina_int_p_con_vista_S.append(fina_int_p_con_vista_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_int_p_con_vista_S = fina_int_p_con_vista_S.append(fina_int_p_con_vista_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_int_p_con_vista_S
 
 # %%
@@ -941,7 +935,7 @@ fina_int_p_con_ahorro_S['AVANZ'] = fina_int_p_con_ahorro_S["AVANZ_moneda_3"]*TIP
 fina_int_p_con_ahorro_S['ATLÁNTIDA'] = fina_int_p_con_ahorro_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 fina_int_p_con_ahorro_S = fina_int_p_con_ahorro_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_int_p_con_ahorro_S = fina_int_p_con_ahorro_S.append(fina_int_p_con_ahorro_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_int_p_con_ahorro_S = fina_int_p_con_ahorro_S.append(fina_int_p_con_ahorro_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_int_p_con_ahorro_S
 
 # %%
@@ -966,39 +960,38 @@ fina_int_p_con_plazos_S['AVANZ'] = fina_int_p_con_plazos_S["AVANZ_moneda_3"]*TIP
 fina_int_p_con_plazos_S['ATLÁNTIDA'] = fina_int_p_con_plazos_S["BANCO ATLÁNTIDA_moneda_3"]*TIPO
 
 fina_int_p_con_plazos_S = fina_int_p_con_plazos_S[['cuenta', 'descripcion', 'BANPRO', 'LAFISE', 'BAC', 'BDF', 'FICOHSA', 'AVANZ', 'ATLÁNTIDA']]
-fina_int_p_con_plazos_S = fina_int_p_con_plazos_S.append(fina_int_p_con_plazos_S.loc[:,:].sum(numeric_only=True), ignore_index=True)
+fina_int_p_con_plazos_S = fina_int_p_con_plazos_S.append(fina_int_p_con_plazos_S.loc[:, :].sum(numeric_only=True), ignore_index=True)
 fina_int_p_con_plazos_S
 
 # %%
-fina_int_p_con_vista_S.iloc[[-1],:]
+fina_int_p_con_vista_S.iloc[[-1], :]
 # %%
-fina_int_p_con_ahorro_S.iloc[[-1],:]
+fina_int_p_con_ahorro_S.iloc[[-1], :]
 # %%
-fina_int_p_con_plazos_S.iloc[[-1],:]
+fina_int_p_con_plazos_S.iloc[[-1], :]
 # %%
-fina_int_p_con_S = pd.concat([fina_int_p_con_vista_S.iloc[[-1],:], fina_int_p_con_ahorro_S.iloc[[-1],:], fina_int_p_con_plazos_S.iloc[[-1],:]])
+fina_int_p_con_S = pd.concat([fina_int_p_con_vista_S.iloc[[-1], :], fina_int_p_con_ahorro_S.iloc[[-1], :], fina_int_p_con_plazos_S.iloc[[-1], :]])
 fina_int_p_con_S['descripcion'] = ['Depósitos a la Vista', 'Depósitos de Ahorro', 'Depósitos a Plazos']
 fina_int_p_con_S
 
 # %%
 """# Importando datos a GoogleSheets"""
 
-import numpy as np
 
-wks.update_values("B14:H17", np.array(depositos_sin_interes_CS.iloc[:,2:]/1000).tolist())
+wks.update_values("B14:H17", np.array(depositos_sin_interes_CS.iloc[:, 2:]/1000).tolist())
 
-wks.update_values("B23:H26", np.array(depositos_sin_interes_S.iloc[:,2:]/1000).tolist())
+wks.update_values("B23:H26", np.array(depositos_sin_interes_S.iloc[:, 2:]/1000).tolist())
 
-wks.update_values("B43:H46", np.array(int_p_con_CS.iloc[:,2:]/1000).tolist())
+wks.update_values("B43:H46", np.array(int_p_con_CS.iloc[:, 2:]/1000).tolist())
 
-wks.update_values("B53:H56", np.array(int_p_con_S.iloc[:,2:]/1000).tolist())
+wks.update_values("B53:H56", np.array(int_p_con_S.iloc[:, 2:]/1000).tolist())
 
-wks.update_values("B106:H108", np.array(financiera_sin_interes_CS.iloc[:,2:]/1000).tolist())
+wks.update_values("B106:H108", np.array(financiera_sin_interes_CS.iloc[:, 2:]/1000).tolist())
 
-wks.update_values("B114:H116", np.array(financiera_sin_interes_S.iloc[:,2:]/1000).tolist())
+wks.update_values("B114:H116", np.array(financiera_sin_interes_S.iloc[:, 2:]/1000).tolist())
 
-wks.update_values("B132:H134", np.array(fina_int_p_con_CS.iloc[:,2:]/1000).tolist())
+wks.update_values("B132:H134", np.array(fina_int_p_con_CS.iloc[:, 2:]/1000).tolist())
 
-wks.update_values("B141:H143", np.array(fina_int_p_con_S.iloc[:,2:]/1000).tolist())
+wks.update_values("B141:H143", np.array(fina_int_p_con_S.iloc[:, 2:]/1000).tolist())
 
 ###############################################################################################################################################################
