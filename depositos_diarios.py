@@ -16,7 +16,7 @@ Esta extración se hace a cada pdf reporte reenviado por la Superintendencia.
 correspondiente formato de GoogleSheet.
 """
 
-# %% Módulos llamados 
+# %% Módulos llamados
 from datetime import datetime
 # , timedelta
 # from datetime import date
@@ -107,18 +107,18 @@ canti = len(instituciones)-1
 # pdf = r'C:\Users\Deybi.Morales\Google Drive\Depositos_diarios_reportes\
 # Reporte Diario Depositos y Liquidez FOGADE-es-ni_161119.pdf'
 pdf = 'C:/Users/Deybi.Morales/Google Drive/Depositos_diarios_reportes/Reporte ' \
-      'Diario Depositos y Liquidez FOGADE-es-ni_190920.pdf'
+      'Diario Depositos y Liquidez FOGADE-es-ni_210920.pdf'
 
 # Nombre del GoogleSheets en Google drive
 googleSheet = "DEPOSITOSDIARIOS"
 
 # Tipo de Cambio de la fecha
-TIPO = 34.5645
+TIPO = 34.5701
 
-FECHA = '19/09/2020'  # domingo de octubre 19
+FECHA = '21/09/2020'  # domingo de octubre 19
 
 # Linea que completar en GoogleSheets
-linea = 674
+linea = 675
 # #
 # #
 # #
