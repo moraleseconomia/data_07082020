@@ -16,6 +16,7 @@ Fecha: 16/12/2019
 # !pip install pygsheets
 # %%
 import pandas as pd
+import pygsheets
 
 # %%
 # Parámetros a Definir provienen del googlesheet creado:

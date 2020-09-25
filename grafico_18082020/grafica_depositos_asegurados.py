@@ -17,6 +17,7 @@ Original file is located at
 from plotly.offline import plot
 import plotly.graph_objs as go
 
+# %%
 x = ["2013",
            "2014",
            "2015",
@@ -1386,7 +1387,7 @@ import numpy as np
 fig = go.Figure()
 #fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-x1 = ['2013',
+x1 = [#'2013',
         '2014',
         "2015",
         "2016",
@@ -1397,10 +1398,10 @@ x1 = ['2013',
 #       'Abr-20',
 #       'May-20',
         'Jun-20',
-        'Jul-20',
+        #'Jul-20',
         'Ago-20']
 
-y1 = [3.1,
+y1 = [#3.1,
       2.9,
       2.9,
       3.1,
@@ -1411,7 +1412,7 @@ y1 = [3.1,
 #      5.33,
 #      5.30,
       5.3,
-      5.3,
+    #  5.3,
       5.1]
 
 fig.add_trace(go.Scatter(
@@ -1610,14 +1611,14 @@ x1 = [
       'ATLANTIDA',
       'SISTEMA']
 
-y1 = [339,
-       569,
-      878,
-     1583,
-     2135,
-     451,
-     3070,
-     623]
+y1 = [338,
+       565,
+      875,
+     1611,
+     2174,
+     447,
+     3217,
+     621]
 
 
 
@@ -1639,7 +1640,7 @@ fig.update_xaxes(showticklabels=False)
 
 
 fig.update_layout(barmode='stack', legend_orientation="h",   xaxis_type='linear',
-                   title='<b></b><b>Promedio de Depósitos Garantizados</b><br><i>Dólares</i><br><i>31 de Julio 2020</i>',
+                   title='<b></b><b>Promedio de Depósitos Garantizados</b><br><i>Dólares</i><br><i>31 de Agosto 2020</i>',
                   #"",
                   paper_bgcolor='rgb(255, 255, 255)',
                   plot_bgcolor='rgb(255, 255, 255)',
@@ -1674,8 +1675,10 @@ plotly.offline.plot(fig,
                    image_height='600',
                      image='svg', image_filename='test')
 
+# %%
 fig.show()
 
+##
 """# Promedio de Depósitos Excluidos"""
 
 import plotly.graph_objects as go
@@ -1698,14 +1701,14 @@ x1 = [
       'ATLANTIDA',
       'SISTEMA']
 
-y1 = [82982,
-              130480,
-              93423,
-              382727,
-              589108,
-              147052,
-               67041,
-              113604]
+y1 = [84075,
+              127856,
+              155698,
+              379954,
+              603924,
+              151790,
+               75303,
+              124056]
 
 
 
@@ -1727,7 +1730,7 @@ fig.update_xaxes(showticklabels=False)
 
 
 fig.update_layout(barmode='stack', legend_orientation="h",   xaxis_type='linear',
-                   title='<b></b><b>Promedio de Depósitos Excluidos</b><br><i>Dólares</i><br><i>31 de Julio 2020</i>',
+                   title='<b></b><b>Promedio de Depósitos Excluidos</b><br><i>Dólares</i><br><i>31 de Agosto 2020</i>',
                   #"",
                   paper_bgcolor='rgb(255, 255, 255)',
                   plot_bgcolor='rgb(255, 255, 255)',
@@ -1761,5 +1764,5 @@ plotly.offline.plot(fig,
                     image_width='1200',
                    image_height='600',
                      image='svg', image_filename='test')
-
+# %%
 fig.show()
